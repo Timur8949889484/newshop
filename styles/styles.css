@@ -645,12 +645,19 @@ footer {
   text-align: left;
 }
 
+/* Базовые стили для .super-contact-item .phone (применяются ко всем экранам изначально) */
 .super-contact-item .phone {
   font-size: 24px;
   color: #0099ff;
   font-weight: bold;
   margin-left: 20px;
-  white-space: nowrap;
+  white-space: nowrap; /* Предотвращает преждевременный перенос всей строки */
+  /* Уберите display: block здесь, если вы добавляли его ранее, так как <br> обрабатывает перенос */
+}
+
+/* Стили для выделенной части с номером телефона */
+.super-contact-item .phone b {
+  font-weight: bold; /* Убедитесь, что текст остается жирным */
 }
 
 /* Основная секция */
@@ -869,6 +876,15 @@ footer {
     line-height: 1.4;
     margin-bottom: 6px;
     text-align: left; /* Выравниваем элементы списка слева */
+  }
+
+  .super-contact-item {
+    width: 60%;
+  }
+
+  .super-contact-item .phone {
+    margin-left: 0px;
+    margin-top: 10px;
   }
 }
 

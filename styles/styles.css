@@ -1,0 +1,950 @@
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure html takes at least the viewport height */
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #111;
+  color: #fff;
+  display: flex; /* Make body a flex container as well */
+  flex-direction: column;
+  flex-grow: 1; /* Allow body to grow and take available space */
+}
+
+/* Основной контейнер для шапки */
+.top-header {
+  position: relative;
+  top: 0;
+  width: 70%;
+  margin: 0 auto; /* Центрирует по горизонтали */
+  background-color: #111;
+  z-index: 1000;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #333;
+  left: 0;
+  right: 0;
+}
+
+/* Общий стиль для ссылок и иконок */
+.top-header a,
+.top-header span {
+  color: #ccc;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 14px;
+}
+
+/* Оранжевый при наведении для остальных */
+.top-header a:hover,
+.top-header span:hover {
+  color: rgb(0, 153, 255);
+  transition: color 0.3s ease; /* плавная анимация цвета */
+  cursor: pointer;
+}
+/* Стиль для строк в шапке */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 5px 0;
+}
+
+/* Линия 1: Location + Contacts */
+.top-line {
+  font-size: 14px;
+}
+
+/* Линия 2: Лого + Поиск + Иконки */
+.middle-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap; /* Не переносить элементы */
+  gap: 10px;
+}
+
+/* Логотип и иконки — фиксированы */
+.logo {
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+
+.middle-line .logo {
+  flex: 0 0 auto;
+}
+
+.middle-line .search-bar {
+  margin: 0 20px;
+}
+
+.middle-line .icons {
+  flex: 0 0 auto;
+}
+
+/* Контакты и Location */
+.location span,
+.contacts a,
+.contacts span {
+  margin-right: 15px;
+  font-size: 14px;
+  color: #ccc;
+  transition: color 0.3s ease; /* плавная анимация цвета */
+}
+
+.contacts a:hover {
+  color: rgb(0, 153, 255);
+}
+
+/* Логотип */
+.logo img {
+  height: 50px;
+}
+
+/* Поиск подстраивается под размер экрана */
+.search-bar {
+  flex: 1 1 auto; /* позволяет уменьшаться */
+  min-width: 200px; /* минимальная ширина, можно уменьшить */
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  background-color: #1c1c1c;
+  border-radius: 8px;
+  border: 1px solid #333;
+  padding: 5px 10px;
+}
+
+.search-bar input {
+  background: none;
+  border: none;
+  outline: none;
+  color: #ccc;
+  flex-grow: 1;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.search-bar span {
+  margin: 0 5px;
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+}
+
+/* Категории */
+.nav-categories {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.nav-categories a {
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.nav-categories a:hover {
+  color: rgb(0, 153, 255);
+}
+
+i.fas {
+  color: white;
+  margin-right: 6px;
+  transition: transform 0.3s ease;
+}
+
+i.fas:hover {
+  transform: scale(1.2); /* увеличиваем на 30% */
+  cursor: pointer;
+}
+
+.catalog-label {
+  color: #aaa;
+  font-size: 14px;
+  padding-right: 10px;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.catalog-label:hover {
+  color: rgb(0, 153, 255);
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background-color: #444;
+  margin: 0 10px;
+}
+
+.icons {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 15px;
+}
+
+.icons span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+}
+
+.icons i {
+  font-size: 20px;
+  margin-bottom: 5px; /* Отступ между иконкой и текстом */
+  padding-left: 5px; /* Сдвигаем иконку вправо */
+}
+
+.insta-icon {
+  font-size: 18px;
+}
+
+/* По умолчанию показываем только desktop логотип */
+.mobile-logo {
+  display: none;
+  margin-left: 20px;
+}
+.desktop-logo {
+  display: block;
+}
+
+/* По умолчанию показываем desktop, скрываем mobile */
+.icon-desktop {
+  display: inline-block;
+}
+.icon-mobile {
+  display: none;
+}
+
+.bottom-icons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #1c1c1c; /* темно-серая полоса */
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 14px;
+  z-index: 9999;
+}
+
+.bottom-icons span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.bottom-icons i {
+  font-size: 20px;
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+.header-image-container {
+  width: 70%; /* чтобы совпадало с шириной top-header */
+  margin: 20px auto; /* центрируем и добавляем отступ сверху/снизу */
+  margin: 50px auto 20px auto; /* 50px сверху, 20px снизу, по центру слева и справа */
+  flex-grow: 1;
+}
+
+.header-image-container img {
+  max-height: 400px; /* максимальная высота */
+  width: 100%; /* картинка занимает всю ширину секции */
+  border-radius: 15px; /* скругленные углы */
+  display: block; /* чтобы убрать нижние отступы */
+  object-fit: cover; /* опционально, если нужно обрезать изображение */
+}
+/* Футер */
+footer {
+  background-color: #1c1c1c;
+  color: #ccc;
+  padding: 20px 0;
+  margin-top: 30px; /* Отступ сверху от основного контента */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  max-width: 1200px; /* Или другое подходящее значение */
+  margin: 0 auto; /* Вот эта строка центрирует элемент по горизонтали */
+}
+
+.footer-column {
+  flex: 1;
+  margin: 0 10px;
+}
+
+.footer-column h3 {
+  color: #eee;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+  color: rgb(0, 153, 255);
+}
+
+.connect-us .social-icons {
+  margin-bottom: 15px;
+}
+
+.connect-us .social-icons a {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 20px;
+  color: #fff;
+  background-color: #333;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.connect-us .social-icons a:hover {
+  background-color: rgb(0, 153, 255);
+}
+
+.copyright::before {
+  content: "";
+  display: block;
+  border-top: 1px solid #333;
+  padding-bottom: 10px; /* Уменьшим отступ снизу до линии */
+  margin-bottom: 15px; /* Увеличим отступ до текста copyright */
+}
+.copyright {
+  text-align: center;
+  padding-top: 15px;
+  font-size: 12px;
+  color: #777;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  box-sizing: border-box;
+}
+
+.mobile-footer-buttons {
+  display: flex;
+  padding: 10px;
+  background-color: #1c1c1c;
+  justify-content: space-around;
+  gap: 10px;
+  flex-direction: column; /* Разместим кнопки и списки вертикально */
+}
+
+.mobile-footer-button {
+  background-color: #333;
+  color: #ccc;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px; /* Отступ между кнопками и списками */
+}
+
+.mobile-footer-button i {
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.company-dropdown,
+.buyers-dropdown {
+  display: none; /* Скрываем по умолчанию */
+  background-color: #2a2a2a; /* Немного светлее фон для контраста */
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 5px; /* Отступ между списками */
+}
+
+.company-dropdown a,
+.buyers-dropdown a {
+  display: block;
+  color: #ccc;
+  padding: 8px 0;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.company-dropdown a:hover,
+.buyers-dropdown a:hover {
+  color: rgb(0, 153, 255);
+}
+
+.categories-section {
+  padding: 20px;
+  background-color: #111; /* Фон секции, как у body */
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.category-card {
+  background-color: #1c1c1c;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  color: #eee;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.category-image {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.category-title {
+  font-size: 14px;
+}
+
+.advantages-section {
+  padding: 40px 20px;
+  background-color: #111;
+  color: #eee;
+  text-align: center;
+}
+
+.advantages-section h2 {
+  margin-bottom: 30px;
+}
+
+.advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.advantage-card {
+  background-color: #1c1c1c;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.advantage-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.advantage-icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+  /* Дополнительные стили для иконок */
+}
+
+.advantage-card.color-1 {
+  background-color: #5d83bd;
+  color: #1d3557;
+}
+
+.advantage-card.color-2 {
+  background-color: #314361;
+  color: #f1faee;
+}
+
+.advantage-card.color-3 {
+  background-color: #233147;
+  color: #f1faee;
+}
+
+.advantage-card h3 {
+  margin-bottom: 10px;
+  color: #fff; /* Белый цвет для заголовков */
+}
+
+.advantage-card p {
+  font-size: 14px;
+  color: #ddd; /* Сделаем текст немного темнее */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Добавим небольшую тень */
+}
+
+/* Переопределения цвета текста для конкретных карточек убираем */
+.advantage-card.color-1 p {
+  color: #dce9f2; /* Оставляем этот цвет, как вы выбрали */
+}
+
+.advantage-card.color-2 p {
+  color: #a8dadc; /* Оставляем этот цвет, как вы выбрали */
+}
+
+.advantage-card.color-3 p {
+  color: #f1faee; /* Оставляем этот цвет, как вы выбрали */
+}
+
+.advantage-icon.mobile-icon {
+  display: none; /* Показываем мобильные иконки на мобильных */
+}
+
+.company-info-section {
+  background-color: #111;
+  color: #eee;
+  padding: 40px 50px; /* Увеличим отступы по бокам */
+}
+
+.company-container {
+  /* Изменено имя класса */
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Остальные стили остаются прежними, но используйте .company-container вместо .container */
+.company-intro {
+  margin-bottom: 25px;
+}
+
+.company-intro h1 {
+  font-size: 2.2em; /* Уменьшим шрифт */
+  margin-bottom: 8px;
+}
+
+.company-intro p {
+  font-size: 1em; /* Уменьшим шрифт */
+  color: #ccc;
+}
+
+.history,
+.dns-today,
+.for-clients,
+.for-partners,
+.for-employees {
+  margin-bottom: 25px;
+}
+
+.history h2,
+.dns-today h2,
+.for-clients h2,
+.for-partners h2,
+.for-employees h2 {
+  font-size: 1.8em; /* Уменьшим шрифт */
+  margin-bottom: 12px;
+}
+
+.history ul,
+.dns-today ul,
+.for-partners ul,
+.for-employees ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.history li {
+  line-height: 1.4; /* Уменьшим межстрочный интервал */
+  margin-bottom: 6px;
+}
+
+.dns-today li {
+  font-size: 1.1em; /* Уменьшим шрифт */
+  line-height: 1.6; /* Уменьшим межстрочный интервал */
+  margin-bottom: 8px;
+}
+
+.for-clients p {
+  line-height: 1.4; /* Уменьшим межстрочный интервал */
+  margin-bottom: 8px;
+}
+
+.for-partners li,
+.for-employees li {
+  line-height: 1.4; /* Уменьшим межстрочный интервал */
+  margin-bottom: 6px;
+}
+
+.super-contacts-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.super-contacts-section h2 {
+  font-size: 32px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.super-contact-item {
+  width: 80%;
+
+  margin: 0 auto 50px auto;
+  padding: 15px 20px;
+  background-color: #141414;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.super-contact-item p {
+  margin: 0;
+  font-size: 24px;
+  flex: 1;
+  text-align: left;
+}
+
+.super-contact-item .phone {
+  font-size: 24px;
+  color: #0099ff;
+  font-weight: bold;
+  margin-left: 20px;
+  white-space: nowrap;
+}
+
+/* Основная секция */
+.stores-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 30px;
+  border-radius: 8px;
+}
+
+/* Стили для h1 ТОЛЬКО внутри .stores-section */
+.stores-section h1 {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.content-wrapper {
+  display: flex;
+  gap: 20px;
+  /* По умолчанию для мобильных - колонками */
+  flex-direction: column;
+}
+
+.stores-list {
+  flex: 1;
+  /* На мобильных - список магазинов первым */
+  order: 1;
+  width: 100%; /* Занимает всю ширину на мобильных */
+}
+
+.store-item {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: #212121;
+  padding: 15px;
+  width: 300px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.store-item h2 {
+  margin-top: 0;
+  color: #4a90e2; /* Синий для заголовков */
+}
+
+.store-item p {
+  margin: 5px 0;
+}
+
+@media only screen and (max-width: 1023px) {
+  body {
+    padding-bottom: 50px; /* Возвращаем отступ для мобильных иконок */
+  }
+  .nav-categories,
+  .desktop-logo,
+  .upper-icons,
+  .contacts,
+  .search-bar .catalog-label,
+  .icon-desktop,
+  .divide,
+  .copyright::before {
+    display: none !important;
+  }
+
+  .mobile-logo,
+  .icon-mobile {
+    display: block;
+  }
+
+  .header-image-container {
+    width: 90%; /* чтобы совпадало с шириной top-header */
+    margin: 20px auto 20px auto; /* 50px сверху, 20px снизу, по центру слева и справа */
+  }
+
+  .header-image-container img {
+    height: 200px; /* максимальная высота */
+  }
+
+  .mobile-footer-buttons {
+    display: flex; /* Показываем на телефонах */
+  }
+
+  .footer-container > div:not(.connect-us) {
+    display: none; /* Скрываем все дочерние div внутри .footer-container, кроме .connect-us */
+  }
+
+  .connect-us {
+    order: -1;
+    margin-bottom: 15px;
+  }
+
+  .connect-us h3 {
+    display: none; /* Скрываем заголовок */
+  }
+
+  .connect-us .social-icons {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 15px; /* Увеличим отступ до ссылок */
+  }
+
+  .connect-us .social-icons a {
+    margin-right: 15px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 22px;
+    /* Дополнительные стили для иконок, если нужно */
+  }
+
+  .connect-us ul {
+    padding-left: 0;
+    border-bottom: 1px solid #2c2c2c;
+    padding-bottom: 10px;
+    margin-top: 20px; /* Добавим отступ сверху от social-icons */
+    position: relative; /* Чтобы позиционировать псевдоэлемент относительно этого элемента */
+  }
+
+  .connect-us ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px;
+    margin-bottom: 18px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #2c2c2c;
+  }
+
+  .connect-us ul li::after {
+    content: "\f054"; /* Font Awesome angle-right иконка */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 14px;
+    color: #ccc;
+  }
+
+  .connect-us ul li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .copyright {
+    text-align: left;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+  }
+
+  .category-card {
+    padding: 10px;
+  }
+
+  .category-image {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+  }
+
+  .category-title {
+    font-size: 12px;
+  }
+
+  .company-intro h1 {
+    font-size: 1.8em;
+    text-align: left; /* Выравниваем заголовок слева */
+  }
+
+  .company-intro p {
+    font-size: 0.95em;
+    text-align: left; /* Выравниваем основной текст слева */
+  }
+
+  .history h2,
+  .dns-today h2,
+  .for-clients h2,
+  .for-partners h2,
+  .for-employees h2 {
+    font-size: 1.5em;
+    text-align: left; /* Выравниваем подзаголовки слева */
+  }
+
+  .history ul,
+  .dns-today ul,
+  .for-partners ul,
+  .for-employees ul {
+    list-style: none;
+  }
+
+  .history li {
+    font-size: 0.95em;
+    line-height: 1.4;
+    margin-bottom: 6px;
+    text-align: left; /* Выравниваем элементы списка слева */
+  }
+
+  .dns-today li {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    text-align: left; /* Выравниваем элементы списка слева */
+  }
+
+  .for-clients p {
+    font-size: 0.95em;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    text-align: left; /* Выравниваем текст слева */
+  }
+
+  .for-partners li,
+  .for-employees li {
+    font-size: 0.95em;
+    line-height: 1.4;
+    margin-bottom: 6px;
+    text-align: left; /* Выравниваем элементы списка слева */
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .top-header {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .middle-line {
+    width: 100vw;
+    margin-left: calc(
+      -1 * (100vw - 106%)
+    ); /* Сдвигает влево, если есть scrollbar или отступ от body */
+  }
+
+  .advantages-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .advantage-card {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    justify-content: space-between;
+    flex-direction: row; /* Разместим текст и иконку по горизонтали на мобильных */
+  }
+
+  .advantage-icon {
+    font-size: 60px;
+    margin-left: auto;
+    margin-bottom: 0;
+  }
+
+  .advantage-info {
+    flex-grow: 1;
+    margin-right: 15px;
+    text-align: left;
+  }
+
+  .advantage-info h3 {
+    text-align: left;
+  }
+
+  .advantage-info p {
+    text-align: left;
+  }
+
+  .advantage-icon.mobile-icon {
+    display: block; /* Показываем мобильные иконки на мобильных */
+  }
+
+  .advantage-icon.desktop-icon {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1023px) {
+  .bottom-icons {
+    display: none;
+  }
+
+  .mobile-footer-buttons {
+    display: none; /* Скрываем на десктопах */
+  }
+
+  .content-wrapper {
+    flex-direction: row; /* На десктопах - в ряд */
+  }
+
+  .stores-list {
+    order: 1; /* Список магазинов слева */
+    width: auto; /* Автоматическая ширина */
+  }
+}
